@@ -29,9 +29,9 @@ class Mediax:
         [views, reposts, quotes, likes, bookmarks] = self.__get_info();
 
         return {
-            'username': 'comming soon',
+            'username': self.__get_username(),
             'avatar': avatar,
-            'verified': 'comming soon',
+            'verified': self.__get_verified(),
             'create_at': 'comming soon',
             'tweet': self.__get_tweet(),
             'media': media,
@@ -63,6 +63,15 @@ class Mediax:
     def __get_tweet(self):
         return self.__soup.find('div', {"class": "css-1dbjc4n r-1s2bzr4"}).get_text();
 
+    def __get_username(self):
+        return self.__soup.find('div', {"class": "css-1dbjc4n r-18u37iz r-1wbh5a2"}).get_text();
+
+    def __get_verified(self):
+        verified = self.__soup.find('svg', {'class': "r-1cvl2hr r-4qtqp9 r-yyyyoo r-1xvli5t r-9cviqr r-f9ja8p r-og9te1 r-bnwqim r-1plcrui r-lrvibr"});
+
+        return True if verified else False;
+
+    # return verif.length < 1 ? false : true;
 
     def __get_media(self) -> list:
         imgs = self.__soup.find_all("img", {"class": 'css-9pa8cd'});
@@ -101,9 +110,17 @@ class Mediax:
 
 x = Mediax();
 
-# data = x.save('data', "https://twitter.com/amortentia0213/status/1710162301326938255");
+[verif, no] = [
+    "https://twitter.com/erigostore/status/1722162111714033965",
+    "https://twitter.com/amortentia0213/status/1710162301326938255"
+]
 
-data = x.get("https://twitter.com/amortentia0213/status/1710162301326938255");
+# data = x.save('data', );
+
+data = x.get(verif);
+print(data);
+
+data = x.get(no);
 print(data);
 
 x.close();
