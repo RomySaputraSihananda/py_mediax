@@ -1,7 +1,7 @@
 from argparse import ArgumentParser;
 from os import system;
 
-from MediaX import X;
+from src import X;
 
 
 if(__name__ == '__main__'):
