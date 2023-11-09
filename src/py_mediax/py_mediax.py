@@ -1,13 +1,11 @@
 from selenium import webdriver;
 from bs4 import BeautifulSoup;
-from argparse import ArgumentParser;
-from os import system;
-from json import dumps;
-
 from selenium.webdriver.chrome.options import Options;
 from selenium.webdriver.support.ui import WebDriverWait;
 from selenium.webdriver.common.by import By;
 from selenium.webdriver.support import expected_conditions as EC;
+import os;
+import requests as rq;
 
 class Mediax:
     __browser = None;
@@ -30,19 +28,41 @@ class Mediax:
 
         [views, reposts, quotes, likes, bookmarks] = self.__get_info();
 
-        return dumps({
-            'media': media,
+        return {
+            'username': 'comming soon',
             'avatar': avatar,
+            'verified': 'comming soon',
+            'create_at': 'comming soon',
+            'tweet': self.__get_tweet(),
+            'media': media,
             'views': views,
             'reposts': reposts,
             'quotes': quotes,
             'likes': likes,
             'bookmarks': bookmarks,
-        });
+        };
     
-    def save(self, url):
-        media = self.get(url)['media'];
-        print(media);
+    def save(self, folder, url):
+        medias = self.get(url)['media'];
+
+        if (not os.path.exists(folder)): os.mkdir(folder);
+
+        for media in medias:
+            req = rq.get(media['url']);
+
+            with open(os.path.join(folder, self.__get_name(media['url'])), 'wb') as file:
+                file.write(req.content);
+    
+            print({
+                'url': url,
+                'message': f'save on {os.path.join(folder, self.__get_name(media["url"]))}',
+            });
+
+        print("download complete");
+
+    def __get_tweet(self):
+        return self.__soup.find('div', {"class": "css-1dbjc4n r-1s2bzr4"}).get_text();
+
 
     def __get_media(self) -> list:
         imgs = self.__soup.find_all("img", {"class": 'css-9pa8cd'});
@@ -66,19 +86,24 @@ class Mediax:
         [views, reposts, quotes, likes, bookmarks] = data; 
 
         return [
-            views.getText(),
-            reposts.getText(),
-            quotes.getText(),
-            likes.getText(),
-            bookmarks.getText(),
+            views.get_text(),
+            reposts.get_text(),
+            quotes.get_text(),
+            likes.get_text(),
+            bookmarks.get_text(),
         ];
+
+    def __get_name(self, url) -> str:
+        return f"{url.split('/')[4].split('?')[0]}.jpg";
 
     def close(self) -> None:
         self.__browser.close();
 
 x = Mediax();
 
-data = x.save("https://twitter.com/amortentia0213/status/1710162301326938255");
-# print(data);
+# data = x.save('data', "https://twitter.com/amortentia0213/status/1710162301326938255");
+
+data = x.get("https://twitter.com/amortentia0213/status/1710162301326938255");
+print(data);
 
 x.close();
