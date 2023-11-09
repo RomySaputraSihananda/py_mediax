@@ -1,3 +1,7 @@
+# py_mediax
+
+py_mediax is a package that allows you to scrape Twitter to retrieve image URLs and info with specified URLs.
+
 ```json
 {
   "media": [
