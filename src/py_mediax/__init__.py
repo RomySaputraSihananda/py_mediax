@@ -1,1 +1,1 @@
-from .main import save, get;
+from .Mediax import Mediax;
