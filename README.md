@@ -30,3 +30,14 @@ py_mediax is a package that allows you to scrape Twitter to retrieve image URLs 
   "bookmarks": "72"
 }
 ```
+
+##### Sample image
+
+- **data/F7u3iB-boAAzYT9.jpg**
+  ![](/data/F7u3iB-boAAzYT9.jpg)
+
+- **data/F7u3iB8awAA1QOJ.jpg**
+  ![](/data/F7u3iB8awAA1QOJ.jpg)
+
+- **data/F7u3iB-aQAAgrHo.jpg**
+  ![](/data/F7u3iB-aQAAgrHo.jpg)
