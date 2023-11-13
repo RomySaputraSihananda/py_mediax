@@ -15,7 +15,7 @@ pip install py_mediax
 ```python
 from py_mediax import Mediax;
 
-data = Mediax.get("https://twitter.com/erigostore/status/1722162111714033965");
+data = Mediax.get("https://twitter.com/amortentia0213/status/1710162301326938255");
 
 print(data);
 ```
@@ -27,7 +27,7 @@ print(data);
   "username": "@amortentia0213",
   "avatar": "https://pbs.twimg.com/profile_images/1651244772646854658/LssoZYlz_normal.jpg",
   "verified": false,
-  "create_at": "comming soon",
+  "create_at": "2023-10-06T05:17:20.000Z",
   "tweet": "230929  #TGIFreday\n#Freya #프레야 #フレヤ #JKT48",
   "media": [
     {
@@ -58,7 +58,7 @@ print(data);
 ```python
 from py_mediax import Mediax;
 
-data = Mediax.save("data", "https://twitter.com/erigostore/status/1722162111714033965");
+data = Mediax.save("data", "https://twitter.com/amortentia0213/status/1710162301326938255");
 
 print(data);
 ```
